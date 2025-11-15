@@ -5,6 +5,7 @@
 
 <!-- badges: start -->
 
+[![R-CMD-check](https://github.com/yummymmz/Biostat625HW4/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/yummymmz/Biostat625HW4/actions/workflows/R-CMD-check.yaml)
 <!-- badges: end -->
 
 The goal of LinearRegression is to …
