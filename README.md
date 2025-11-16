@@ -6,6 +6,8 @@
 <!-- badges: start -->
 
 [![R-CMD-check](https://github.com/yummymmz/Biostat625HW4/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/yummymmz/Biostat625HW4/actions/workflows/R-CMD-check.yaml)
+[![Codecov test
+coverage](https://codecov.io/gh/yummymmz/Biostat625HW4/graph/badge.svg)](https://app.codecov.io/gh/yummymmz/Biostat625HW4)
 <!-- badges: end -->
 
 The goal of LinearRegression is to …
