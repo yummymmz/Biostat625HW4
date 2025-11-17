@@ -9,9 +9,8 @@ vignette: >
 ---
 
 ```{r setup, include=FALSE}
-# Setup and package loading
 knitr::opts_chunk$set(echo = TRUE)
-library(LinearRegression)  # Load your package
+library(LinearRegression)  # My package
 library(microbenchmark)    # For performance comparison
 ```
 

@@ -35,7 +35,8 @@ Key features include:
     usage.
 3.  **Comprehensive vignette(s)** written in R Markdown that demonstrate
     the usage of the core functions (e.g., model fitting, prediction,
-    summary).
+    summary). The primary tutorial is provided in the vignette
+    [`vignettes/getting_started.Rmd`](vignettes/getting_started.Rmd).
 4.  **Comparison(s) against R’s base `lm()` function** on simulated
     datasets are included in the vignette
     [`vignettes/comparison.Rmd`](vignettes/comparison.Rmd),
@@ -96,7 +97,7 @@ summary(fit)
 #> 
 #> Call:
 #> mpg ~ wt + hp
-#> <environment: 0x1222f8d10>
+#> <environment: 0x10189ad10>
 #> 
 #> Residuals:
 #>     Min.0%     1Q.25% Median.50%     3Q.75%   Max.100% 
