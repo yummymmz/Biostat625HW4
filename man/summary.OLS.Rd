@@ -12,19 +12,19 @@
 )
 }
 \arguments{
-\item{object}{An object of class `"OLS"` (from `lm_fit()`).}
+\item{object}{An object of class \code{"OLS"} (from \code{lm_fit()}).}
 
 \item{digits}{Number of significant digits to print.}
 
-\item{signif.stars}{Logical; if `TRUE`, include significance stars.}
+\item{signif.stars}{Logical; if \code{TRUE}, include significance stars.}
 
 \item{...}{Additional arguments (ignored).}
 }
 \value{
-Invisibly returns `object`. The summary is printed to the console.
+Invisibly returns \code{object}. The summary is printed to the console.
 }
 \description{
-Produces a summary of a fitted `"OLS"` object returned by `lm_fit()`,
+Produces a summary of a fitted \code{"OLS"} object returned by \code{lm_fit()},
 including regression coefficients, standard errors, t values, p values,
 R², adjusted R², residual standard error, and F‑statistic.
 }

@@ -14,6 +14,8 @@
 #' df$y <- 2 + 1.5*df$x1 - 3*df$x2 + rnorm(100, sd = 0.5)
 #' fit <- lm_fit(y ~ x1 + x2, df)
 #' predict(fit)
+#' new_data <- data.frame(x1 = c(0.5, -1), x2 = c(0.2, 1))
+#' predict(fit, newdata=new_data)
 #'
 #' @importFrom stats delete.response terms
 #'
@@ -24,7 +26,7 @@ predict.OLS <- function(object, newdata = NULL, ...) {
     return(object$fitted.values)
   } else {
     terms_tmp <- delete.response(object$terms)
-    attr(terms_tmp, ".Environment") <- NULL
+    attr(terms_tmp, ".Environment") <- environment()
     X_new <- model.matrix(terms_tmp, newdata)
     as.vector(X_new %*% object$coefficients)
   }

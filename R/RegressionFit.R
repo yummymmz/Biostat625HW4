@@ -111,6 +111,7 @@ lm_fit <- function(formula, data, na.action = na.omit) {
 
   # y_hat & residuals
   y_hat <- as.vector(X %*% beta_hat)
+  names(y_hat) <- rownames(X)
   residuals <- as.vector(y - y_hat)
 
   # df

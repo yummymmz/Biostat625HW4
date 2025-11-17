@@ -7,9 +7,9 @@
 \method{predict}{OLS}(object, newdata = NULL, ...)
 }
 \arguments{
-\item{object}{An `"OLS"` object returned by `lm_fit()`.}
+\item{object}{An \code{"OLS"} object returned by \code{lm_fit()}.}
 
-\item{newdata}{An optional `data.frame` containing predictor variables.
+\item{newdata}{An optional \code{data.frame} containing predictor variables.
 If omitted, the original fitted values are returned.}
 
 \item{...}{Ignored.}
@@ -18,7 +18,7 @@ If omitted, the original fitted values are returned.}
 Numeric vector of predicted values.
 }
 \description{
-Generate fitted or predicted values from a fitted `"OLS"` model.
+Generate fitted or predicted values from a fitted \code{"OLS"} model.
 }
 \examples{
 set.seed(42)
@@ -26,5 +26,7 @@ df <- data.frame(x1 = rnorm(100), x2 = rnorm(100))
 df$y <- 2 + 1.5*df$x1 - 3*df$x2 + rnorm(100, sd = 0.5)
 fit <- lm_fit(y ~ x1 + x2, df)
 predict(fit)
+new_data <- data.frame(x1 = c(0.5, -1), x2 = c(0.2, 1))
+predict(fit, newdata=new_data)
 
 }

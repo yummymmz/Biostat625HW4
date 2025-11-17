@@ -1,8 +1,8 @@
 ---
-title: "getting_started"
+title: "Getting Started with LinearRegression"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{getting_started}
+  %\VignetteIndexEntry{Getting Started with LinearRegression}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
@@ -16,4 +16,114 @@ knitr::opts_chunk$set(
 
 ```{r setup}
 library(LinearRegression)
+set.seed(42)
 ```
+
+# 1. Introduction
+
+The `LinearRegression` package implements **Ordinary Least Squares (OLS)** regression using 
+both R and C++ (via **RcppArmadillo**) for improved computational efficiency.  
+This vignette demonstrates how to fit, summarize, and predict OLS models using the methods provided by this package.
+
+You'll see:
+- How to create or simulate data for regression analysis  
+- How to fit a model with `lm_fit()`  
+- How to examine results with `summary.OLS()`  
+- How to generate predictions with `predict.OLS()`  
+
+---
+
+# 2. Example Data
+
+You can use either an **included sample dataset** or **simulated data**.
+
+### (a) Simulated Data Example
+
+```{r simulate}
+# Simulate regression data
+set.seed(42)
+n <- 100
+x1 <- rnorm(n)
+x2 <- rnorm(n)
+# True model: y = 2 + 1.5*x1 - 3*x2 + error
+y  <- 2 + 1.5*x1 - 3*x2 + rnorm(n, sd = 0.5)
+df <- data.frame(y, x1, x2)
+head(df)
+```
+
+### (b) Included Dataset Example (`mtcars`)
+
+You can also try the built-in dataset `mtcars` in base R, for a familiar example.
+
+```{r sample-data}
+head(mtcars)
+```
+
+---
+
+# 3. Fitting a Model
+
+We can fit a linear model using both our custom `lm_fit()` function 
+and R’s built-in `lm()` for comparison.
+
+```{r model-fit}
+fit_pkg <- lm_fit(y ~ x1 + x2, data = df)
+fit_r   <- lm(y ~ x1 + x2, data = df)
+```
+
+---
+
+# 4. Summarizing Results
+
+`summary(fit_pkg)` provides a detailed statistical summary of your fitted model, 
+including coefficients, t-tests, R², adjusted R², residual SE, and F-statistic.
+
+```{r model-summary}
+summary(fit_pkg)
+```
+
+You can verify the correctness by comparing with base R’s output:
+
+```{r model-summary-r}
+summary(fit_r)
+```
+
+---
+
+# 5. Making Predictions
+
+The function `predict.OLS()` can generate both fitted and new predicted values.
+
+```{r predictions}
+# Fitted values (training)
+head(predict(fit_pkg))
+
+# New data prediction
+new_df <- data.frame(x1 = c(0.5, -1), x2 = c(0.2, 1.0))
+predict(fit_pkg, newdata = new_df)
+```
+
+
+
+# 6. Extension Example
+
+You can also analyze real datasets such as `mtcars`.
+
+```{r mtcars-example}
+model_mtcars <- lm_fit(mpg ~ wt + hp, data = mtcars)
+summary(model_mtcars)
+head(predict(model_mtcars))
+```
+
+---
+
+# 7. Conclusion
+
+This vignette demonstrates how to:
+- simulate regression data or use built-in datasets,  
+- fit an OLS model using `lm_fit()`,  
+- summarize model results,  
+- and make predictions.
+
+Further comparison with R’s built-in `lm()` (accuracy and computational performance)
+can be found in the vignette `comparison.Rmd`.

@@ -1,16 +1,21 @@
 Package: LinearRegression
 Type: Package
-Title: What the Package Does (Title Case)
+Title: Linear Regression via OLS Implemented with R and Rcpp
 Version: 0.1.0
 Authors@R: c(
     person(
-      "Jane", "Doe",
-      email = "jane@example.com",
+      "Jiamin", "Zou",
+      email = "jmzou@umich.edu",
       role = c("aut", "cre")
     )
   )
-Description: More about what it does (maybe more than one line).
-    Continuation lines should be indented.
+Description: `LinearRegression` is an R package that implements Ordinary Least Squares (OLS) regression using both R and C++ (via **Rcpp**) for improved computational efficiency.  
+    It provides lightweight and flexible functions for **model fitting**, **prediction**, 
+    and **model summarization**, mirroring the functionality of R’s built‑in `lm()` function.
+    This package is developed as part of **Biostat 625 Homework #4**, with the goal of 
+    demonstrating how to build an R package from scratch and compare the implementation 
+    against the original R base functions in terms of **correctness** (via `all.equal()`) 
+    and **efficiency** (via `microbenchmark()`).
 License: GPL-3
 Encoding: UTF-8
 LazyData: true
@@ -25,3 +30,4 @@ Suggests:
     microbenchmark
 VignetteBuilder: knitr
 Config/testthat/edition: 3
+Roxygen: list(markdown = TRUE)

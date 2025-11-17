@@ -1,6 +1,6 @@
 ---
-title: "Comparison of Custom Linear Regression with Base R 'lm'"
-author: "Your Name"
+title: "Comparison: lm_fit vs lm"
+author: "Jiamin Zou"
 output: rmarkdown::html_vignette
 vignette: >
   %\VignetteIndexEntry{Comparison: lm_fit vs lm}
@@ -67,7 +67,7 @@ If the result is `TRUE`, the coefficients match precisely.
 
 ```{r}
 # Compare fitted values
-all.equal(as.vector(fit_pkg$fitted.values), fitted(fit_r), tolerance = 1e-6)
+all.equal(fit_pkg$fitted.values, fitted(fit_r), tolerance = 1e-6)
 
 # Compare prediction results on new data
 new_data <- data.frame(x1 = c(0.5, -1), x2 = c(0.2, 1))
@@ -112,7 +112,7 @@ the **microbenchmark** package.
 bench <- microbenchmark(
   lm_fit = lm_fit(y ~ x1 + x2, df),
   lm_base = lm(y ~ x1 + x2, df),
-  times = 50
+  times = 20
 )
 bench
 ```

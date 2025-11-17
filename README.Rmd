@@ -20,37 +20,103 @@ knitr::opts_chunk$set(
 [![Codecov test coverage](https://codecov.io/gh/yummymmz/Biostat625HW4/graph/badge.svg)](https://app.codecov.io/gh/yummymmz/Biostat625HW4)
 <!-- badges: end -->
 
-The goal of LinearRegression is to ...
+`LinearRegression` is an R package that implements Ordinary Least Squares (OLS) regression using both R and C++ (via **Rcpp**) for improved computational efficiency.  
+It provides lightweight and flexible functions for **model fitting**, **prediction**, 
+and **model summarization**, mirroring the functionality of R’s built‑in `lm()` function.
+
+This package is developed as part of **Biostat 625 Homework #4**, with the goal of 
+demonstrating how to build an R package from scratch and compare the implementation 
+against the original R base functions in terms of **correctness** (via `all.equal()`) 
+and **efficiency** (via `microbenchmark()`).
+
+Key features include:
+
+### **Required components**
+1. **A complete R package**, including well‑documented R source code (`R/`), function help pages 
+   (`man/`), and working examples that run without errors or warnings.
+2. **Public GitHub repository** hosting the package, with a clearly written `README.md` file 
+   introducing its purpose, installation, and usage.
+3. **Comprehensive vignette(s)** written in R Markdown that demonstrate the usage of the core 
+   functions (e.g., model fitting, prediction, summary).
+4. **Comparison(s) against R's base `lm()` function** on simulated datasets are included in the 
+   vignette [`vignettes/comparison.Rmd`](vignettes/comparison.Rmd), demonstrating both the  
+   *numerical correctness* (checked with `all.equal()`) and the *computational efficiency* 
+   (evaluated using `microbenchmark()`).
+
+### **Optional bonus components**
+1. **C++ integration via Rcpp**, providing a fast and efficient implementation of **QR decomposition** for    solving the Ordinary Least Squares (OLS) problem. The C++ function `lm_qr_extended_cpp()` is called        internally by `lm_fit()`.
+2. **Unit testing** implemented with the **testthat** framework to verify correctness of all 
+   major functions.
+3. **Continuous integration (CI)** configured on GitHub using **GitHub Actions**, ensuring 
+   that all tests are automatically executed for every commit and pull request.
+4. **Code coverage monitoring** integrated via **Codecov**, verifying that all R and C++ code 
+   paths are exercised during testing (100% coverage).
+
+
+---
 
 ## Installation
 
-You can install the development version of LinearRegression like so:
+You can install the development version of **LinearRegression** directly from GitHub:
 
-``` r
-# FILL THIS IN! HOW CAN PEOPLE INSTALL YOUR DEV PACKAGE?
+```r
+# install.packages("devtools")
+devtools::install_github("yummymmz/Biostat625HW4")
 ```
+
+After installation, load the package:
+
+```r
+library(LinearRegression)
+```
+
+---
 
 ## Example
 
-This is a basic example which shows you how to solve a common problem:
+Here is a short example that demonstrates how to fit and summarize a model
+using `lm_fit()`, `summary.OLS()`, and `predict.OLS()`:
 
 ```{r example}
 library(LinearRegression)
-## basic example code
+# Use built-in mtcars data
+data(mtcars)
+
+# Fit the model using lm_fit()
+fit <- lm_fit(mpg ~ wt + hp, data = mtcars)
+
+# Show coefficients and summary
+summary(fit)
+
+# Predict fitted values (no newdata)
+head(predict(fit))
+
+# Predict on new data
+new_data <- data.frame(wt = c(2, 3), hp = c(120, 180))
+predict(fit, newdata = new_data)
 ```
 
-What is special about using `README.Rmd` instead of just `README.md`? You can include R chunks like so:
+---
 
-```{r cars}
-summary(cars)
+## Learning more
+
+A detailed tutorial and performance comparison with R’s `lm()` 
+are included in the vignette `vignettes/getting_started.Rmd` and `vignettes/comparison.Rmd`.
+
+```r
+browseVignettes("LinearRegression")
 ```
 
-You'll still need to render `README.Rmd` regularly, to keep `README.md` up-to-date. `devtools::build_readme()` is handy for this.
+---
 
-You can also embed plots, for example:
+## Citation
 
-```{r pressure, echo = FALSE}
-plot(pressure)
-```
+If you use **LinearRegression** in coursework or research, please cite this repository:
+> Jiamin (2025). *LinearRegression: Simple OLS Regression Implementation in R.*  
+> GitHub repository: <https://github.com/yummymmz/Biostat625HW4>
 
-In that case, don't forget to commit and push the resulting figure files, so they display on GitHub and CRAN.
+---
+
+## License
+
+This package is released under the MIT License.
