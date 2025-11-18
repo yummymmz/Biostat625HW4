@@ -33,11 +33,10 @@ You'll see:
 
 ---
 
-# 2. Example Data
+# 2. Example Data: Simulated Data Example
 
 You can use either an **included sample dataset** or **simulated data**.
 
-### (a) Simulated Data Example
 
 ```{r simulate}
 # Simulate regression data
@@ -51,13 +50,6 @@ df <- data.frame(y, x1, x2)
 head(df)
 ```
 
-### (b) Included Dataset Example (`mtcars`)
-
-You can also try the built-in dataset `mtcars` in base R, for a familiar example.
-
-```{r sample-data}
-head(mtcars)
-```
 
 ---
 
@@ -105,7 +97,14 @@ predict(fit_pkg, newdata = new_df)
 
 
 
-# 6. Extension Example
+# 6. Extension Example: Included Dataset Example (`mtcars`)
+
+
+You can also try the built-in dataset `mtcars` in base R, for a familiar example.
+
+```{r sample-data}
+head(mtcars)
+```
 
 You can also analyze real datasets such as `mtcars`.
 

@@ -80,22 +80,45 @@ Here is a short example that demonstrates how to fit and summarize a model
 using `lm_fit()`, `summary.OLS()`, and `predict.OLS()`:
 
 ```{r example}
+## Example 1: using built-in dataset (mtcars)
 library(LinearRegression)
-# Use built-in mtcars data
 data(mtcars)
 
-# Fit the model using lm_fit()
-fit <- lm_fit(mpg ~ wt + hp, data = mtcars)
+# Fit OLS model
+fit_mtcars <- lm_fit(mpg ~ wt + hp, data = mtcars)
 
-# Show coefficients and summary
-summary(fit)
+# Inspect results
+fit_mtcars$coefficients
 
-# Predict fitted values (no newdata)
-head(predict(fit))
+# Summarize
+summary(fit_mtcars)
+
+# Prediction
+head(predict(fit_mtcars))
 
 # Predict on new data
 new_data <- data.frame(wt = c(2, 3), hp = c(120, 180))
-predict(fit, newdata = new_data)
+predict(fit_mtcars, newdata = new_data)
+
+## Example 2: using simulated data
+set.seed(42)
+df <- data.frame(
+ x1 = rnorm(100),
+ x2 = rnorm(100)
+)
+df$y <- 2 + 1.5*df$x1 - 3*df$x2 + rnorm(100, sd = 0.5)
+
+# Fit OLS model
+fit_sim <- lm_fit(y ~ x1 + x2, data = df)
+
+# Inspect results
+fit_sim$coefficients
+
+# Summarize
+summary(fit_sim)
+
+# Prediction
+predict(fit_sim)
 ```
 
 ---
@@ -114,7 +137,7 @@ browseVignettes("LinearRegression")
 ## Citation
 
 If you use **LinearRegression** in coursework or research, please cite this repository:
-> Jiamin (2025). *LinearRegression: Simple OLS Regression Implementation in R.*  
+> Jiamin Zou (2025). *LinearRegression: Simple OLS Regression Implementation in R.*  
 > GitHub repository: <https://github.com/yummymmz/Biostat625HW4>
 
 ---

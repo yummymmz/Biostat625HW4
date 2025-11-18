@@ -18,7 +18,7 @@ List lm_qr_extended_cpp(const arma::mat& X, const arma::vec& y) {
   arma::vec beta = arma::solve(R, Q.t() * y);
 
   return List::create(
-    Named("beta") = beta,  // 回归系数
-    Named("R") = R         // QR 分解中的 R，用于计算协方差矩阵
+    Named("beta") = beta,
+    Named("R") = R
   );
 }

@@ -85,19 +85,24 @@ Here is a short example that demonstrates how to fit and summarize a
 model using `lm_fit()`, `summary.OLS()`, and `predict.OLS()`:
 
 ``` r
+## Example 1: using built-in dataset (mtcars)
 library(LinearRegression)
-# Use built-in mtcars data
 data(mtcars)
 
-# Fit the model using lm_fit()
-fit <- lm_fit(mpg ~ wt + hp, data = mtcars)
+# Fit OLS model
+fit_mtcars <- lm_fit(mpg ~ wt + hp, data = mtcars)
 
-# Show coefficients and summary
-summary(fit)
+# Inspect results
+fit_mtcars$coefficients
+#> (Intercept)          wt          hp 
+#> 37.22727012 -3.87783074 -0.03177295
+
+# Summarize
+summary(fit_mtcars)
 #> 
 #> Call:
 #> mpg ~ wt + hp
-#> <environment: 0x10189ad10>
+#> <environment: 0x129812710>
 #> 
 #> Residuals:
 #>     Min.0%     1Q.25% Median.50%     3Q.75%   Max.100% 
@@ -115,8 +120,8 @@ summary(fit)
 #> Multiple R-squared: 0.82679 , Adjusted R-squared: 0.81484
 #> F-statistic: 69.2112 on 2 and 29 DF,  p-value: 9.109e-12
 
-# Predict fitted values (no newdata)
-head(predict(fit))
+# Prediction
+head(predict(fit_mtcars))
 #>         Mazda RX4     Mazda RX4 Wag        Datsun 710    Hornet 4 Drive 
 #>          23.57233          22.58348          25.27582          21.26502 
 #> Hornet Sportabout           Valiant 
@@ -124,8 +129,84 @@ head(predict(fit))
 
 # Predict on new data
 new_data <- data.frame(wt = c(2, 3), hp = c(120, 180))
-predict(fit, newdata = new_data)
+predict(fit_mtcars, newdata = new_data)
 #> [1] 25.65885 19.87465
+
+## Example 2: using simulated data
+set.seed(42)
+df <- data.frame(
+ x1 = rnorm(100),
+ x2 = rnorm(100)
+)
+df$y <- 2 + 1.5*df$x1 - 3*df$x2 + rnorm(100, sd = 0.5)
+
+# Fit OLS model
+fit_sim <- lm_fit(y ~ x1 + x2, data = df)
+
+# Inspect results
+fit_sim$coefficients
+#> (Intercept)          x1          x2 
+#>    2.000883    1.428145   -2.957353
+
+# Summarize
+summary(fit_sim)
+#> 
+#> Call:
+#> y ~ x1 + x2
+#> <environment: 0x129812710>
+#> 
+#> Residuals:
+#>     Min.0%     1Q.25% Median.50%     3Q.75%   Max.100% 
+#>    -1.2883    -0.3309    -0.0413     0.3185     1.2603 
+#> 
+#> Coefficients:
+#>             Estimate Std. Error t value Pr(>|t|)    
+#> (Intercept)  2.00088    0.05095   39.27   <2e-16 ***
+#> x1           1.42815    0.04894   29.18   <2e-16 ***
+#> x2          -2.95735    0.05636  -52.47   <2e-16 ***
+#> ---
+#> Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+#> 
+#> Residual standard error: 0.50682 on 97 degrees of freedom
+#> Multiple R-squared: 0.97313 , Adjusted R-squared: 0.97257
+#> F-statistic: 1756.183 on 2 and 97 DF,  p-value: < 2.2e-16
+
+# Prediction
+predict(fit_sim)
+#>           1           2           3           4           5           6 
+#>  0.40713205 -1.89528614  5.48632581 -2.56191132  4.55012169  1.53728027 
+#>           7           8           9          10          11          12 
+#>  5.40831616  2.22752897  4.32693232  1.55891722  3.93863424  4.94693593 
+#>          13          14          15          16          17          18 
+#>  1.45299170  3.09388050  6.72293792  4.03980871  3.11101663 -9.78336796 
+#>          19          20          21          22          23          24 
+#>  2.54380066  3.48028176  5.98013583  3.80551389  1.38657113  6.68302934 
+#>          25          26          27          28          29          30 
+#>  4.71288503  2.65262350  3.44830887  5.47051786  6.27998157  0.55598385 
+#>          31          32          33          34          35          36 
+#>  0.97267742  4.46510584  3.47897547 -2.18953377 -1.53612983  2.79329827 
+#>          37          38          39          40          41          42 
+#>  1.22751703 -2.76759201 -0.05779998  2.20764228  2.54972880  4.11042140 
+#>          43          44          45          46          47          48 
+#>  4.39873821  1.05012191  1.27073534 -0.67366576  2.26456154  5.34430359 
+#>          49          50          51          52          53          54 
+#> -0.67615368  6.06129836  2.58099899  5.46991355  0.79951826  3.72830386 
+#>          55          56          57          58          59          60 
+#>  3.51265835  6.05778755  2.99396139  4.49589479 -0.69595927 -1.40037337 
+#>          61          62          63          64          65          66 
+#>  1.99551071  5.43505860  2.34915157  5.07265651 -0.78267424 -0.37507450 
+#>          67          68          69          70          71          72 
+#>  5.41626566  2.13945921  3.06474382  0.38189802  1.19069281 -0.60209439 
+#>          73          74          75          76          77          78 
+#>  8.05210462 -4.35721394 -1.33180943  3.27652848  7.38318023  0.76160670 
+#>          79          80          81          82          83          84 
+#> -0.69310921  0.44903196  3.71334006  4.09664910  1.03649679  0.95682829 
+#>          85          86          87          88          89          90 
+#>  1.12107651  6.82662771 -0.38158604  0.10092472  5.80709153  7.89025534 
+#>          91          92          93          94          95          96 
+#>  3.38289274  2.34138466  2.18261334  7.81441371  3.25112112 -2.43947378 
+#>          97          98          99         100 
+#> -0.80950932 -1.81753751 -3.25316219  2.55278340
 ```
 
 ------------------------------------------------------------------------
@@ -145,7 +226,7 @@ browseVignettes("LinearRegression")
 ## Citation
 
 If you use **LinearRegression** in coursework or research, please cite
-this repository: \> Jiamin (2025). *LinearRegression: Simple OLS
+this repository: \> Jiamin Zou (2025). *LinearRegression: Simple OLS
 Regression Implementation in R.*  
 \> GitHub repository: <https://github.com/yummymmz/Biostat625HW4>
 

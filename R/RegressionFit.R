@@ -56,11 +56,6 @@
 #' @author
 #' Developed for Biostat 625 as a teaching example of implementing OLS in R with Rcpp.
 #'
-#' @references
-#' Chambers J.M. (1992) *Linear Models*, in *Statistical Models in S*,
-#' Wadsworth & Brooks/Cole.
-#' Wilkinson G.N. & Rogers C.E. (1973). *Symbolic Descriptions of Factorial Models for Analysis of Variance*,
-#' *Applied Statistics*, 22, 392–399.
 #'
 #' @seealso
 #' \code{\link[stats]{lm}} for the full‑featured base R implementation.
@@ -68,6 +63,28 @@
 #' \code{\link{predict.OLS}} for prediction on new data.
 #'
 #' @examples
+#' ## Example 1: using built-in dataset (mtcars)
+#' library(LinearRegression)
+#' data(mtcars)
+#'
+#' # Fit OLS model
+#' fit_mtcars <- lm_fit(mpg ~ wt + hp, data = mtcars)
+#'
+#' # Inspect results
+#' fit_mtcars$coefficients
+#'
+#' # Summarize
+#' summary(fit_mtcars)
+#'
+#' # Prediction
+#' head(predict(fit_mtcars))
+#'
+#' # Predict on new data
+#' new_data <- data.frame(wt = c(2, 3), hp = c(120, 180))
+#' predict(fit_mtcars, newdata = new_data)
+#'
+#'
+#' ## Example 2: using simulated data
 #' set.seed(42)
 #' df <- data.frame(
 #'   x1 = rnorm(100),
@@ -76,16 +93,18 @@
 #' df$y <- 2 + 1.5*df$x1 - 3*df$x2 + rnorm(100, sd = 0.5)
 #'
 #' # Fit OLS model
-#' fit <- lm_fit(y ~ x1 + x2, data = df)
+#' fit_sim <- lm_fit(y ~ x1 + x2, data = df)
 #'
 #' # Inspect results
-#' fit$coefficients
+#' fit_sim$coefficients
 #'
 #' # Summarize
-#' summary(fit)
+#' summary(fit_sim)
 #'
 #' # Prediction
-#' predict(fit)
+#' predict(fit_sim)
+#'
+#'
 #'
 #' @useDynLib LinearRegression, .registration = TRUE
 #' @importFrom Rcpp sourceCpp
