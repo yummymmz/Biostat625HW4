@@ -33,10 +33,11 @@ You'll see:
 
 ---
 
-# 2. Example Data: Simulated Data Example
+# 2. Example Data:Simulated Data Example
 
 You can use either an **included sample dataset** or **simulated data**.
 
+### (a) Simulated Data Example
 
 ```{r simulate}
 # Simulate regression data
