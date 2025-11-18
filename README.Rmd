@@ -63,7 +63,7 @@ You can install the development version of **LinearRegression** directly from Gi
 
 ```r
 # install.packages("devtools")
-devtools::install_github("yummymmz/Biostat625HW4")
+devtools::install_github("yummymmz/Biostat625HW4",build_vignettes = TRUE)
 ```
 
 After installation, load the package:
@@ -71,6 +71,8 @@ After installation, load the package:
 ```r
 library(LinearRegression)
 ```
+
+Use ?lm_fit to get help page of the function. If it doesn't show, you can restart R and try it again.
 
 ---
 

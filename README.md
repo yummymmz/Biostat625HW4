@@ -68,7 +68,7 @@ from GitHub:
 
 ``` r
 # install.packages("devtools")
-devtools::install_github("yummymmz/Biostat625HW4")
+devtools::install_github("yummymmz/Biostat625HW4",build_vignettes = TRUE)
 ```
 
 After installation, load the package:
@@ -76,6 +76,9 @@ After installation, load the package:
 ``` r
 library(LinearRegression)
 ```
+
+Use ?lm_fit to get help page of the function. If it doesn’t show, you
+can restart R and try it again.
 
 ------------------------------------------------------------------------
 
@@ -102,7 +105,7 @@ summary(fit_mtcars)
 #> 
 #> Call:
 #> mpg ~ wt + hp
-#> <environment: 0x129812710>
+#> <environment: 0x10e07bd10>
 #> 
 #> Residuals:
 #>     Min.0%     1Q.25% Median.50%     3Q.75%   Max.100% 
@@ -153,7 +156,7 @@ summary(fit_sim)
 #> 
 #> Call:
 #> y ~ x1 + x2
-#> <environment: 0x129812710>
+#> <environment: 0x10e07bd10>
 #> 
 #> Residuals:
 #>     Min.0%     1Q.25% Median.50%     3Q.75%   Max.100% 
