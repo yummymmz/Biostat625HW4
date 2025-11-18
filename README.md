@@ -105,7 +105,7 @@ summary(fit_mtcars)
 #> 
 #> Call:
 #> mpg ~ wt + hp
-#> <environment: 0x103da8510>
+#> <environment: 0x10e837110>
 #> 
 #> Residuals:
 #>     Min.0%     1Q.25% Median.50%     3Q.75%   Max.100% 
@@ -156,7 +156,7 @@ summary(fit_sim)
 #> 
 #> Call:
 #> y ~ x1 + x2
-#> <environment: 0x103da8510>
+#> <environment: 0x10e837110>
 #> 
 #> Residuals:
 #>     Min.0%     1Q.25% Median.50%     3Q.75%   Max.100% 
@@ -219,6 +219,10 @@ predict(fit_sim)
 A detailed tutorial and performance comparison with R’s `lm()` are
 included in the vignette `vignettes/getting_started.Rmd` and
 `vignettes/comparison.Rmd`.
+
+``` r
+browseVignettes("LinearRegression")
+```
 
 ------------------------------------------------------------------------
 

@@ -130,6 +130,10 @@ predict(fit_sim)
 A detailed tutorial and performance comparison with R’s `lm()` 
 are included in the vignette `vignettes/getting_started.Rmd` and `vignettes/comparison.Rmd`.
 
+```r
+browseVignettes("LinearRegression")
+```
+
 ---
 
 ## Citation
